@@ -35,21 +35,34 @@ class ToyRobot {
    * Moves the robot
    */
   move() {
-
+    if (this.state.isOnTheTable) {
+      return;
+    }
+    return this.state;
   }
 
   /**
    * Turns the robot left
    */
   left() {
-
+    if (this.state.isOnTheTable) {
+      return;
+    }
+    return this.state;
   }
 
   /**
    * Turns the robot right
    */
   right() {
-
+    if (this.state.isOnTheTable) {
+      let newFacingPosition = this.state.f + 1;
+      if (newFacingPosition > 3) {
+        newFacingPosition = 0;
+      }
+      this.state.f = newFacingPosition;
+    }
+    return this.state;
   }
 
   /**
