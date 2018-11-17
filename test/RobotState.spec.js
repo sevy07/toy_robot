@@ -53,4 +53,19 @@ describe("Robot state", () => {
     expect(state.f).to.equal(0);
     expect(state.isOnTheTable).to.equal(false);
   });
+
+  it("should accept decimals", () => {
+    const state = new RobotState(1.5, 1, 0);
+    expect(state.x).to.equal(1.5);
+    expect(state.y).to.equal(1);
+    expect(state.f).to.equal(0);
+    expect(state.isOnTheTable).to.equal(true);
+  });
+
+  it("should initialise the state off the table when wrong inputs are passed", () => {
+    const offTheTableState = new RobotState(-1, -1, 0);
+    expect(offTheTableState).to.eql(new RobotState("a", "hello", "0"));
+    expect(offTheTableState).to.eql(new RobotState(-2.5, -1.3, 0));
+    expect(offTheTableState).to.eql(new RobotState( NaN, null, undefined));
+  });
 });

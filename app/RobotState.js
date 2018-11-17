@@ -26,20 +26,19 @@ class RobotState {
    */
   constructor(x, y, f) {
 
-    this.f = f;
     this.isOnTheTable = true;
+    this.x = this.getInitialValue(x, maxX);
+    this.y = this.getInitialValue(y, maxY);
+    this.f = this.getInitialValue(f, 3);
 
-    if (x < 0 || x > maxX) {
-      this.isOnTheTable = false;
-      this.x = 0;
+  }
+
+  getInitialValue(value, upperBound) {
+    if (typeof value == "number" && value >= 0 && value <= upperBound) {
+      return value;
     } else {
-      this.x = x;
-    }
-    if (y < 0 || y > maxY) {
       this.isOnTheTable = false;
-      this.y = 0;
-    } else {
-      this.y = y;
+      return 0;
     }
   }
 }

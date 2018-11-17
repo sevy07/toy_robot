@@ -5,6 +5,10 @@
  */
 const path = require("path");
 const config = require(path.join("..", "config", "config.json"));
+const RobotState = require(path.join("..", "app", "RobotState"));
+
+const maxX = config.table.width;
+const maxY = config.table.height;
 
 /**
  * @constant cardinals maps cacrdinal points to integers
@@ -27,22 +31,64 @@ class ToyRobot {
    * @constructor Initialise a ToyRobot with a state
    * @param {RobotState} state
    */
-  constructor(state) {
-    this.state = state;
+  constructor(initParams) {
+    if (initParams) {
+      this.state = new RobotState(initParams.x, initParams.y, initParams.f);
+    } else {
+      this.state = new RobotState(-1, -1, 0);
+    }
   }
 
   /**
    * Moves the robot
+   * @returns {RobotState} state
    */
   move() {
     if (this.state.isOnTheTable) {
-      return;
+      const facingPosition = this.state.f;
+      switch (facingPosition) {
+      case 0:
+      case 2:
+        this.moveY(facingPosition == 0 ? 1 : -1);
+        break;
+      case 1:
+      case 3:
+        this.moveX(facingPosition == 1 ? 1 : -1);
+        break;
+      default:
+        break;
+      }
     }
     return this.state;
   }
 
   /**
+   * Moves alog X Axis
+   * @param {Numer} imcrement
+   */
+  moveX(increment) {
+    let newPositionX = this.state.x + increment;
+    if (newPositionX < 0 || newPositionX > maxX){
+      return;
+    }
+    this.state.x = newPositionX;
+  }
+
+  /**
+   * Moves alog X Axis
+   * @param {Numer} imcrement
+   */
+  moveY(increment) {
+    let newPositionY = this.state.y + increment;
+    if (newPositionY < 0 || newPositionY > maxY) {
+      return;
+    }
+    this.state.y = newPositionY;
+  }
+
+  /**
    * Turns the robot left
+   * @returns {RobotState} state
    */
   left() {
     if (this.state.isOnTheTable) {
@@ -57,6 +103,7 @@ class ToyRobot {
 
   /**
    * Turns the robot right
+   * @returns {RobotState} state
    */
   right() {
     if (this.state.isOnTheTable) {
