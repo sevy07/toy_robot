@@ -6,5 +6,11 @@
   "north": "NORTH",
   "south": "SOUTH",
   "east": "EAST",
-  "west": "WEST"
+  "west": "WEST",
+  "place": "PLACE",
+  "move": "MOVE",
+  "left": "LEFT",
+  "right": "RIGHT",
+  "report": "REPORT",
+  "inputSeparator": ","
 }

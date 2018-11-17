@@ -29,7 +29,7 @@ class ToyRobot {
 
   /**
    * @constructor Initialise a ToyRobot with a state
-   * @param {RobotState} state
+   * @param {initParams} state : x, y and f
    */
   constructor(initParams) {
     if (initParams) {
@@ -63,7 +63,7 @@ class ToyRobot {
   }
 
   /**
-   * Moves alog X Axis
+   * Moves along X Axis
    * @param {Numer} imcrement
    */
   moveX(increment) {
@@ -75,7 +75,7 @@ class ToyRobot {
   }
 
   /**
-   * Moves alog X Axis
+   * Moves along Y Axis
    * @param {Numer} imcrement
    */
   moveY(increment) {

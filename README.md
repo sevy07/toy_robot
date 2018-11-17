@@ -1,75 +1,44 @@
 Toy Robot Simulator
 ===================
 
-Description
+Solution
 -----------
 
-- The application is a simulation of a toy robot moving on a square tabletop,
-  of dimensions 5 units x 5 units.
-- There are no other obstructions on the table surface.
-- The robot is free to roam around the surface of the table, but must be
-  prevented from falling to destruction. Any movement that would result in the
-  robot falling from the table must be prevented, however further valid
-  movement commands must still be allowed.
+- The application receives a **file** as input.
+- Test data is provided in the `input` folder.
+- To start the application, any of the following commands are supported:
+  - `npm start` will by default take as input the file `input.txt` at the root of the project.
+  - `npm run play <file>` will take the file `<file>` as input.
 
-Create an application that can read in commands of the following form:
+- The project is fully unit tested, use `npm install` followed by `npm test` to run the tests.
+- The table width and height are configurable in `config/config.json`.
+- The robot actions are also configurable in `config/config.json`.
+- Upper case and Lower case are ignored and can both be used.
 
-    PLACE X,Y,F
-    MOVE
-    LEFT
-    RIGHT
-    REPORT
-
-- PLACE will put the toy robot on the table in position X,Y and facing NORTH,
-  SOUTH, EAST or WEST.
-- The origin (0,0) can be considered to be the SOUTH WEST most corner.
-- The first valid command to the robot is a PLACE command, after that, any
-  sequence of commands may be issued, in any order, including another PLACE
-  command. The application should discard all commands in the sequence until
-  a valid PLACE command has been executed.
-- MOVE will move the toy robot one unit forward in the direction it is
-  currently facing.
-- LEFT and RIGHT will rotate the robot 90 degrees in the specified direction
-  without changing the position of the robot.
-- REPORT will announce the X,Y and F of the robot. This can be in any form,
-  but standard output is sufficient.
-
-- A robot that is not on the table can choose the ignore the MOVE, LEFT, RIGHT
-  and REPORT commands.
-- Input can be from a file, or from standard input, as the developer chooses.
-- Provide test data to exercise the application.
-
-Constraints
------------
-
-- The toy robot must not fall off the table during movement. This also
-  includes the initial placement of the toy robot.
-- Any move that would cause the robot to fall must be ignored.
-
-Example Input and Output
+Test Data
 ------------------------
 
-### Example a
+### Example 1: input/input1.txt, example provided
 
     PLACE 0,0,NORTH
     MOVE
     REPORT
 
-Expected output:
+Output:
 
     0,1,NORTH
 
-### Example b
+### Example 2: input/input2.txt, example provided
 
     PLACE 0,0,NORTH
     LEFT
     REPORT
 
-Expected output:
+Output:
 
     0,0,WEST
 
-### Example c
+### Example 3: input/input3.txt, example provided
 
     PLACE 1,2,EAST
     MOVE
@@ -78,20 +47,124 @@ Expected output:
     MOVE
     REPORT
 
-Expected output
+Output:
 
     3,3,NORTH
 
-Deliverables
-------------
+### Example 4: input/input4.txt
 
-Please provide your source code, and any test code/data you using in
-developing your solution.
+    PLACE 5,5,NORTH
+    REPORT
+    MOVE
+    REPORT
+    RIGHT
+    MOVE
+    REPORT
+    RIGHT
+    MOVE
+    REPORT
 
-Please engineer your solution to a standard you consider suitable for
-production. It is not required to provide any graphical output showing the
-movement of the toy robot.
+Output:
+
+    5,5,NORTH
+    5,5,NORTH
+    5,5,EAST
+    5,4,SOUTH
+
+Explanation:
+  The Robot cannot fall from the table,
+
+- MOVE NORTH is ignored
+- MOVE EAST is ignored
+- MOVE SOUTH is executed
+
+
+### Example 5: input/input5.txt
+
+    PLACE 0,0,WEST
+    REPORT
+    MOVE
+    REPORT
+    LEFT
+    MOVE
+    REPORT
+    LEFT
+    MOVE
+    REPORT
+
+Output:
+
+    0,0,WEST
+    0,0,WEST
+    0,0,SOUTH
+    1,0,EAST
+
+Explanation:
+    The Robot cannot fall from the table, 
+-   MOVE WEST is ignored
+-   MOVE SOUTH is ignored
+-   MOVE EAST is executed
+
+### Example 6: input/input6.txt
+
+    REPORT
+    MOVE
+    LEFT
+    RIGHT
+    REPORT
+    PLACE 7,7,NORTH
+    REPORT
+    PLACE 3,3,NORTH
+    REPORT
+    MOVE
+    REPORT
+    PLACE 10,10,NORTH
+    MOVE
+    REPORT
+    PLACE 0,0,NORTH
+    MOVE
+    REPORT
+
+Output:
+
+    3,3,NORTH
+    3,4,NORTH
+    3,5,NORTH
+    0,1,NORTH
+
+Explanation:
+- The application discards all commands in the sequence until a valid PLACE command has been executed.
+- The first valid is PLACE 3,3,NORTH.
+- The robot moves freely afterwards.
+- PLACE 10,10,NORTH is ignored, but all subsequent moves are allowed.
+- PLACE 0,0,NORTH is allowed.
+
+### Example 7: input/input7.txt
+
+    PLACE 3,3,NORTH
+    LEFT
+    LEFT
+    LEFT
+    LEFT
+    MOVE
+    REPORT
+    RIGHT
+    RIGHT
+    RIGHT
+    RIGHT
+    MOVE
+    REPORT
+
+Output:
+
+    3,4,NORTH
+    3,5,NORTH
+
+Explanation:
+- Turning 4 times LEFT or RIGHT puts the robot back into its original direction
 
 ## Acknowledgements
 
-The Toy Robot was created by [Jon Eaves](https://twitter.com/joneaves)
+This implementation of Toy Robot was developed by  [Jean-Yves Chanal](https://github.com/sevy07).
+
+The Toy Robot was created by [Jon Eaves](https://twitter.com/joneaves).

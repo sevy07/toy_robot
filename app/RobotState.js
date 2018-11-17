@@ -33,6 +33,11 @@ class RobotState {
 
   }
 
+  /**
+   * Initialises the value if it is between 0 and the upper bound
+   * @param {Number} value 
+   * @param {Number} upperBound 
+   */
   getInitialValue(value, upperBound) {
     if (typeof value == "number" && value >= 0 && value <= upperBound) {
       return value;
