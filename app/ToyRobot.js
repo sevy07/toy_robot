@@ -46,7 +46,11 @@ class ToyRobot {
    */
   left() {
     if (this.state.isOnTheTable) {
-      return;
+      let newFacingPosition = this.state.f - 1;
+      if (newFacingPosition < 0) {
+        newFacingPosition = 3;
+      }
+      this.state.f = newFacingPosition;
     }
     return this.state;
   }

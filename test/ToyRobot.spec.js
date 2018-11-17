@@ -64,25 +64,38 @@ describe("Toy Robot class", () => {
     });
   });
 
-  describe("Left", () => {
+  describe.only("Left", () => {
     it("should ignore the command if the robot is not on the table", () => {
-      expect(false).to.be.equal(true);
+      const robot = new ToyRobot(offTheTableState);
+      const newState = robot.left();
+      expect(newState).to.eql(offTheTableState);
     });
 
     it("should face East when turning left from South", () => {
-      expect(false).to.be.equal(true);
+      const robot = new ToyRobot(new RobotState(0, 1, 2));
+      const robotFacingEast = new RobotState(0, 1, 1);
+      const newState = robot.left();
+      expect(newState).to.eql(robotFacingEast);
     });
 
     it("should face West when turning left from North", () => {
-      expect(false).to.be.equal(true);
+      const robot = new ToyRobot(onTheTableState);
+      const newState = robot.left();
+      const robotFacingWest = new RobotState(0, 1, 3);
+      expect(newState).to.eql(robotFacingWest);
     });
 
     it("should face the same direction when turning left 4 times", () => {
-      expect(false).to.be.equal(true);
+      const robot = new ToyRobot(offTheTableState);
+      robot.left();
+      robot.left();
+      robot.left();
+      const newState = robot.left();
+      expect(newState).to.eql(offTheTableState);
     });
   });
 
-  describe.only("Right", () => {
+  describe("Right", () => {
     it("should ignore the command if the robot is not on the table", () => {
       const robot = new ToyRobot(offTheTableState);
       const newState = robot.right();
