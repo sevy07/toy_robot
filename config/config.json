@@ -1,0 +1,10 @@
+{
+  "table": {
+    "width": 5,
+    "height": 5
+  },
+  "north": "NORTH",
+  "south": "SOUTH",
+  "east": "EAST",
+  "west": "WEST"
+}
