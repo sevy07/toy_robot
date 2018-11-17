@@ -1,0 +1,33 @@
+# git
+.orig
+
+#logs
+npm-debug.log*
+
+# Dependency directories
+node_modules
+
+# optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# IDEs
+# VS Code
+.vscode
+
+# idea
+.idea
+*.iml
+
+# eclipse
+.settings
+.project
+
+# sublime
+*.sublime-workspace
+*.sublime-project
