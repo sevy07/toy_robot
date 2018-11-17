@@ -1,7 +1,5 @@
 /**
- * @class RobotState
- * 
- * Represents the state of the robot 
+ * LM Group Technical test
  * 
  * @author Jean-Yves Chanal
  */
@@ -11,10 +9,17 @@ const config = require(path.join("..", "config", "config.json"));
 const maxX = config.table.width;
 const maxY = config.table.height;
 
+/**
+ * @class RobotState
+ * 
+ * Represents the state of the robot 
+ * 
+ * @author Jean-Yves Chanal
+ */
 class RobotState {
 
   /**
-   * @constructor RobotState
+   * @constructor Initialise a RobotState with x and x coordinates, facing f
    * @param {Number} x 
    * @param {Number} y 
    * @param {Number} f 

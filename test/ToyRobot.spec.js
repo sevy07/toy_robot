@@ -1,6 +1,13 @@
+/**
+ * LM Group Technical test
+ * 
+ * @author Jean-Yves Chanal
+ */
 const path = require("path");
 const expect = require("chai").expect;
 
+const config = require(path.join("..", "config", "config.json"));
+const RobotState = require(path.join("..", "app", "RobotState"));
 const ToyRobot = require(path.join("..", "app", "ToyRobot"));
 
 describe("Toy Robot class", () => {
@@ -90,13 +97,20 @@ describe("Toy Robot class", () => {
     });
   });
 
-  describe("Report", () => {
+  describe.only("Report", () => {
     it("should ignore the command if the robot is not on the table", () => {
-      expect(false).to.be.equal(true);
+      const offTheTableState = new RobotState(-1, -1, 0);
+      const robot = new ToyRobot(offTheTableState);
+      const report = robot.report();
+      expect(report).to.equal("");
     });
 
     it("should return the current state of the robot as a string", () => {
-      expect(false).to.be.equal(true);
+      const offTheTableState = new RobotState(0, 1, 0);
+      const robot = new ToyRobot(offTheTableState);
+      const report = robot.report();
+      const expected = `0,1,${config.north}`;
+      expect(report).to.be.equal(expected);
     });
   });
 

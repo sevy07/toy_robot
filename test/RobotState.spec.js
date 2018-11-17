@@ -1,3 +1,8 @@
+/**
+ * LM Group Technical test
+ * 
+ * @author Jean-Yves Chanal
+ */
 const path = require("path");
 const expect = require("chai").expect;
 
@@ -7,7 +12,7 @@ const config = require(path.join("..", "config", "config.json"));
 const maxX = config.table.width;
 const maxY = config.table.height;
 
-describe.only("Robot state", () => {
+describe("Robot state", () => {
 
   it("should initialise the state on the table", () => {
     const state = new RobotState(1, 1, 0);
